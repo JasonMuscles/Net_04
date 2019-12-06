@@ -13,8 +13,15 @@ def service_client(new_socket):
     response = "HTTP/1.1 200 OK\r\n"
     response += "\r\n"  # 格式中海有一个空行
     # 2.2准备发送给浏览器的数据body
-    response += "<h>服务器发的数据...</h1>"
+    # response += "<h>服务器发的数据...</h1>"
+    f = open("/Users/jason/Study/Python高级-全部（html版）/01day/index.html", "rb")
+    html_content = f.read()
+    f.close()
+    # 将response header发送给浏览器
     new_socket.send(response.encode("gbk"))
+
+    # 将response body发送给浏览器
+    new_socket.send(html_content)
     # 3.关闭套接字
     new_socket.close()
 
